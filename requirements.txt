@@ -3,3 +3,4 @@ streamlit-webrtc==0.47.1
 openai==1.1.1
 opencv-python-headless==4.8.1.78
 pyperclip==1.8.2
+clipboard==0.0.4
