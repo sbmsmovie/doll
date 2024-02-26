@@ -12,7 +12,8 @@ INPUT_TEXT = 'Text'
 
 REQUESTS_TIMEOUT = 60
 
-api_key = os.environ["OPENAI_API_KEY"]
+api_key = st.sidebar.text_input("OpenAI API Key")
+openai.api_key = api_key
 
 client = OpenAI(
     api_key=api_key,
