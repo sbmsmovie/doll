@@ -4,7 +4,7 @@ import time
 import requests
 import clipboard
 import streamlit as st
-from openai import OpenAI
+import openai
 
 INPUT_IMAGE_URL = 'Image URL'
 INPUT_LOCAL_IMAGE_FILE = 'Local Image File'
@@ -14,10 +14,6 @@ REQUESTS_TIMEOUT = 60
 
 api_key = st.sidebar.text_input("OpenAI API Key")
 openai.api_key = api_key
-
-client = OpenAI(
-    api_key=api_key,
-)
 
 st.set_page_config(
     page_title="Data-Oriented Linguistic Lens",
@@ -200,7 +196,7 @@ def generate_text_from_text(prompt: str, additional_message: str) -> tuple[str, 
         ],
     }
 
-    response = client.chat.completions.create(
+    response = openai.chat.completions.create(
         model='gpt-4-1106-preview',
         messages=[system_message, user_message], max_tokens=st.session_state.max_tokens,
     )
@@ -211,7 +207,7 @@ def generate_text_from_text(prompt: str, additional_message: str) -> tuple[str, 
     return content, usage
 
 def generate_voice(input_text: str, voice_option: str):
-    response = client.audio.speech.create(
+    response = openai.audio.speech.create(
         model='tts-1',
         voice=voice_option,
         input=input_text
